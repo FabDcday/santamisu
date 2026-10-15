@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Mission Secret Santa</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bouton:#c62f2f;--ciel1:#dff1ff;--ciel2:#f9fcff;--texte:#1d2a3a;--carte:#ffffffee;--carte-bord:#e6d7b8;--rouge:#c62f2f;--or:#a87a10;--doux:#5a6b7d;--neige:#9fc4e6;--ombre:0 10px 30px rgba(20,40,70,.15)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bouton:#c62f2f;--ciel1:#0b1d33;--ciel2:#163a5c;--texte:#fdf8ef;--carte:#132a44ee;--carte-bord:#f4c95d55;--rouge:#ff6b6b;--or:#f4c95d;--doux:#b8c7d8;--neige:#ffffff;--ombre:0 10px 30px rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{--bouton:#c62f2f;--ciel1:#0b1d33;--ciel2:#163a5c;--texte:#fdf8ef;--carte:#132a44ee;--carte-bord:#f4c95d55;--rouge:#ff6b6b;--or:#f4c95d;--doux:#b8c7d8;--neige:#ffffff;--ombre:0 10px 30px rgba(0,0,0,.4)}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{min-height:100vh;background:linear-gradient(180deg,var(--ciel1),var(--ciel2)) fixed;color:var(--texte);font:17px/1.55 'Nunito',system-ui,sans-serif}
+#neige,#confettis{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+#confettis{z-index:5}
+main{position:relative;z-index:1;min-height:100vh;display:grid;place-items:center;padding:24px 16px}
+.carte{width:min(520px,100%);background:var(--carte);border:2px solid var(--carte-bord);border-radius:24px;padding:28px 22px;text-align:center;box-shadow:var(--ombre);backdrop-filter:blur(4px)}
+h1,h2{font-family:'Mountains of Christmas',cursive;color:var(--rouge);line-height:1.15;margin:.2em 0 .4em}
+h1{font-size:2.1rem}
+h2{font-size:1.8rem}
+.emoji{font-size:4rem;line-height:1}
+.saute{display:inline-block;animation:saute 1.6s ease-in-out infinite}
+@keyframes saute{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-10px) rotate(-6deg)}}
+.sous-titre{font-size:1.15rem}
+.evenement{font-weight:700;color:var(--or)}
+.btn{font:700 1.1rem 'Nunito',sans-serif;border:none;border-radius:999px;padding:14px 28px;background:var(--bouton);color:#fff;cursor:pointer;box-shadow:0 6px 0 #8e1f1f;transition:transform .1s;margin-top:8px}
+.btn:active{transform:translateY(3px);box-shadow:0 3px 0 #8e1f1f}
+.btn.secondaire{background:transparent;color:var(--rouge);box-shadow:none;border:2px solid var(--rouge);font-size:1rem;padding:10px 20px}
+.petit{font-size:.85rem;color:var(--doux);margin-top:18px}
+.ticket{position:relative;margin:16px auto;width:min(360px,100%);height:120px;border-radius:16px;border:3px dashed var(--or);display:grid;place-items:center;overflow:hidden;background:repeating-linear-gradient(45deg,#fff7e6,#fff7e6 12px,#fdeccd 12px,#fdeccd 24px);user-select:none;-webkit-user-select:none}
+.ticket-nom{font-family:'Mountains of Christmas',cursive;font-size:2.4rem;color:#b3261e;padding:0 12px;overflow-wrap:anywhere}
+#grattage{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab;transition:opacity .6s}
+.ticket.gagne{animation:gagne .8s ease}
+@keyframes gagne{0%{transform:scale(1)}40%{transform:scale(1.08) rotate(-2deg)}70%{transform:scale(.97) rotate(1deg)}100%{transform:scale(1)}}
+.consigne{color:var(--doux)}
+.lien-btn{background:none;border:none;color:var(--doux);text-decoration:underline;font:inherit;font-size:.85rem;cursor:pointer}
+.mission{font-size:1.15rem}
+.mission strong{color:var(--rouge)}
+.delai{font-weight:700}
+blockquote{margin:16px 0;padding:12px 16px;border-left:4px solid var(--or);text-align:left;font-style:italic;background:rgba(127,127,127,.08);border-radius:8px}
+@media (prefers-reduced-motion:reduce){.saute,.ticket.gagne{animation:none}#grattage{transition:none}}
+</style>
+</head>
+<body>
+<canvas id="neige" aria-hidden="true"></canvas>
+<main>
+  <section id="ecran-erreur" hidden>
+    <div class="carte">
+      <div class="emoji">🦌</div>
+      <h1 id="erreur-titre"></h1>
+      <p id="erreur-texte"></p>
+    </div>
+  </section>
+  <section id="ecran-accueil" hidden>
+    <div class="carte">
+      <div class="emoji"><span class="saute">🎅</span></div>
+      <h1 id="accueil-titre"></h1>
+      <p class="sous-titre">Une mission top secrète t'attend…</p>
+      <p class="evenement" id="accueil-evenement"></p>
+      <button class="btn" id="btn-ouvrir">Ouvrir ma mission 🎁</button>
+      <p class="petit" id="accueil-pas-moi"></p>
+    </div>
+  </section>
+  <section id="ecran-mission" hidden>
+    <div class="carte">
+      <h2>Tu offres un cadeau à…</h2>
+      <div class="ticket" id="ticket">
+        <div class="ticket-nom" id="nom-cible" aria-hidden="true"></div>
+        <canvas id="grattage" aria-label="Zone à gratter"></canvas>
+      </div>
+      <p class="consigne" id="consigne">Gratte le ticket avec ton doigt ou ta souris ✨</p>
+      <button class="lien-btn" id="btn-reveler">Révéler sans gratter</button>
+      <div id="apres" hidden>
+        <p class="mission" id="texte-mission"></p>
+        <p class="delai" id="texte-delai"></p>
+        <blockquote id="texte-mot" hidden></blockquote>
+        <button class="btn secondaire" id="btn-regratter">Regratter 🎟️</button>
+      </div>
+    </div>
+  </section>
+</main>
+<canvas id="confettis" aria-hidden="true"></canvas>
+<script src="config.js"></script>
+<script src="lien.js"></script>
+<script src="textes.js"></script>
+<script>
+(function () {
+  const $ = id => document.getElementById(id);
+  const cfg = window.SANTA_CONFIG || {};
+  const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let donnees = null;
+  let revele = false;
+
+  function montrer(id) {
+    document.querySelectorAll('main > section').forEach(s => { s.hidden = s.id !== id; });
+  }
+
+  function erreur(titre, texte) {
+    $('erreur-titre').textContent = titre;
+    $('erreur-texte').textContent = texte;
+    montrer('ecran-erreur');
+  }
+
+  async function demarrer() {
+    if (!window.crypto || !crypto.subtle) return erreur('Navigateur trop ancien', 'Les lutins ne peuvent pas ouvrir ta mission ici. Essaie avec un navigateur à jour.');
+    const res = await SantaLien.ouvrirMission(location.hash, cfg);
+    if (res.etat === 'abime') return erreur('Oups, ce lien est abîmé', "Les lutins n'arrivent pas à le lire. Demande à l'organisateur de te le renvoyer.");
+    if (res.etat !== 'ok') return erreur("Ce lien n'est plus valable", "Le tirage a peut-être changé, ou le lien a été mal copié. Demande ton lien à l'organisateur.");
+    donnees = { ...res.data, jeton: SantaLien.extraireJeton(location.hash) };
+    $('accueil-titre').textContent = SantaTextes.texteAccueil(donnees.d);
+    $('accueil-evenement').textContent = cfg.evenement || '';
+    $('accueil-pas-moi').textContent = SantaTextes.textePasMoi(donnees.d);
+    montrer('ecran-accueil');
+  }
+
+  function remplirMission() {
+    $('nom-cible').textContent = donnees.r;
+    const p = $('texte-mission');
+    p.replaceChildren();
+    SantaTextes.modeleMission(SantaTextes.choisirVariante(donnees.jeton)).split('{r}').forEach((morceau, i) => {
+      if (i) {
+        const s = document.createElement('strong');
+        s.textContent = donnees.r;
+        p.append(s);
+      }
+      p.append(morceau);
+    });
+    $('texte-delai').textContent = SantaTextes.texteDelai({
+      jours: SantaTextes.joursRestants(cfg.date, new Date()),
+      dateTexte: SantaTextes.formaterDate(cfg.date),
+      budget: cfg.budget,
+      destinataire: donnees.r
+    });
+    $('texte-mot').hidden = !cfg.mot;
+    $('texte-mot').textContent = cfg.mot || '';
+  }
+
+  function preparerGrattage() {
+    revele = false;
+    $('nom-cible').setAttribute('aria-hidden', 'true');
+    const canvas = $('grattage');
+    const boite = { width: canvas.clientWidth, height: canvas.clientHeight };
+    const dpr = window.devicePixelRatio || 1;
+    canvas.style.transition = 'none';
+    canvas.style.opacity = '1';
+    canvas.style.pointerEvents = 'auto';
+    void canvas.offsetHeight;
+    canvas.style.transition = '';
+    canvas.width = Math.round(boite.width * dpr);
+    canvas.height = Math.round(boite.height * dpr);
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    const degrade = ctx.createLinearGradient(0, 0, boite.width, boite.height);
+    degrade.addColorStop(0, '#c3c7cd');
+    degrade.addColorStop(0.5, '#eef0f3');
+    degrade.addColorStop(1, '#a4a9b1');
+    ctx.fillStyle = degrade;
+    ctx.fillRect(0, 0, boite.width, boite.height);
+    ctx.fillStyle = '#6f757e';
+    ctx.font = '700 18px Nunito, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('🎄 Gratte ici 🎄', boite.width / 2, boite.height / 2);
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.lineWidth = 38;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    let dernier = null;
+    let mouvements = 0;
+    const point = e => {
+      const b = canvas.getBoundingClientRect();
+      return { x: e.clientX - b.left, y: e.clientY - b.top };
+    };
+    const gratter = (a, b) => {
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x + 0.01, b.y);
+      ctx.stroke();
+    };
+    const verifier = () => {
+      if (revele) return;
+      const d = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+      let vides = 0;
+      let total = 0;
+      for (let i = 3; i < d.length; i += 64) {
+        total++;
+        if (d[i] === 0) vides++;
+      }
+      if (vides / total > 0.6) reveler();
+    };
+    canvas.onpointerdown = e => {
+      canvas.setPointerCapture(e.pointerId);
+      dernier = point(e);
+      gratter(dernier, dernier);
+    };
+    canvas.onpointermove = e => {
+      if (!dernier) return;
+      const p = point(e);
+      gratter(dernier, p);
+      dernier = p;
+      if (++mouvements % 8 === 0) verifier();
+    };
+    canvas.onpointerup = canvas.onpointercancel = () => {
+      dernier = null;
+      verifier();
+    };
+  }
+
+  function reveler() {
+    if (revele) return;
+    revele = true;
+    const canvas = $('grattage');
+    canvas.style.opacity = '0';
+    canvas.style.pointerEvents = 'none';
+    $('consigne').hidden = true;
+    $('btn-reveler').hidden = true;
+    $('apres').hidden = false;
+    $('nom-cible').removeAttribute('aria-hidden');
+    $('ticket').classList.remove('gagne');
+    void $('ticket').offsetWidth;
+    $('ticket').classList.add('gagne');
+    confettis();
+  }
+
+  $('btn-ouvrir').onclick = () => {
+    montrer('ecran-mission');
+    remplirMission();
+    preparerGrattage();
+  };
+  $('btn-reveler').onclick = reveler;
+  $('btn-regratter').onclick = () => {
+    $('apres').hidden = true;
+    $('consigne').hidden = false;
+    $('btn-reveler').hidden = false;
+    preparerGrattage();
+  };
+
+  const neige = $('neige');
+  const cn = neige.getContext('2d');
+  const couleurNeige = getComputedStyle(document.documentElement).getPropertyValue('--neige').trim() || '#ffffff';
+  let flocons = [];
+  function dimensionner() {
+    const dpr = window.devicePixelRatio || 1;
+    neige.width = Math.round(innerWidth * dpr);
+    neige.height = Math.round(innerHeight * dpr);
+    cn.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.min(140, Math.round(innerWidth / 8));
+    flocons = Array.from({ length: n }, () => ({
+      x: Math.random() * innerWidth, y: Math.random() * innerHeight,
+      r: 1 + Math.random() * 3, v: 0.3 + Math.random() * 1.2, o: Math.random() * Math.PI * 2
+    }));
+  }
+  function dessinerNeige() {
+    cn.clearRect(0, 0, innerWidth, innerHeight);
+    cn.fillStyle = couleurNeige;
+    cn.globalAlpha = 0.85;
+    for (const f of flocons) {
+      cn.beginPath();
+      cn.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+      cn.fill();
+    }
+  }
+  function animerNeige() {
+    for (const f of flocons) {
+      f.y += f.v;
+      f.o += 0.01;
+      f.x += Math.sin(f.o) * 0.4;
+      if (f.y > innerHeight + 5) { f.y = -5; f.x = Math.random() * innerWidth; }
+    }
+    dessinerNeige();
+    requestAnimationFrame(animerNeige);
+  }
+  addEventListener('resize', () => { dimensionner(); if (reduit) dessinerNeige(); });
+  dimensionner();
+  if (reduit) dessinerNeige(); else requestAnimationFrame(animerNeige);
+
+  function confettis() {
+    if (reduit) return;
+    const c = $('confettis');
+    const x = c.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    c.width = Math.round(innerWidth * dpr);
+    c.height = Math.round(innerHeight * dpr);
+    x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const couleurs = ['#d64545', '#f4c95d', '#2e8b57', '#5aa9e6', '#ffffff'];
+    const ps = Array.from({ length: 160 }, () => ({
+      x: innerWidth / 2, y: innerHeight / 3,
+      vx: (Math.random() - 0.5) * 14, vy: -Math.random() * 12 - 4,
+      a: Math.random() * 6, va: (Math.random() - 0.5) * 0.4,
+      t: 6 + Math.random() * 6, c: couleurs[Math.floor(Math.random() * couleurs.length)]
+    }));
+    const debut = performance.now();
+    (function image(maintenant) {
+      const ecoule = maintenant - debut;
+      x.clearRect(0, 0, innerWidth, innerHeight);
+      for (const p of ps) {
+        p.vy += 0.35; p.vx *= 0.99; p.x += p.vx; p.y += p.vy; p.a += p.va;
+        x.save();
+        x.translate(p.x, p.y);
+        x.rotate(p.a);
+        x.globalAlpha = Math.max(0, 1 - ecoule / 3500);
+        x.fillStyle = p.c;
+        x.fillRect(-p.t / 2, -p.t / 4, p.t, p.t / 2);
+        x.restore();
+      }
+      if (ecoule < 3500) requestAnimationFrame(image);
+      else x.clearRect(0, 0, innerWidth, innerHeight);
+    })(debut);
+  }
+
+  addEventListener('hashchange', () => location.reload());
+  demarrer().catch(() => erreur('Oups, ce lien est abîmé', "Les lutins n'arrivent pas à le lire. Demande à l'organisateur de te le renvoyer."));
+})();
+</script>
+</body>
+</html>
