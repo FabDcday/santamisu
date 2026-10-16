@@ -8,34 +8,72 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bouton:#c62f2f;--ciel1:#dff1ff;--ciel2:#f9fcff;--texte:#1d2a3a;--carte:#ffffffee;--carte-bord:#e6d7b8;--rouge:#c62f2f;--or:#a87a10;--doux:#5a6b7d;--neige:#9fc4e6;--ombre:0 10px 30px rgba(20,40,70,.15)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bouton:#c62f2f;--ciel1:#0b1d33;--ciel2:#163a5c;--texte:#fdf8ef;--carte:#132a44ee;--carte-bord:#f4c95d55;--rouge:#ff6b6b;--or:#f4c95d;--doux:#b8c7d8;--neige:#ffffff;--ombre:0 10px 30px rgba(0,0,0,.4)}}
-:root[data-theme="dark"]{--bouton:#c62f2f;--ciel1:#0b1d33;--ciel2:#163a5c;--texte:#fdf8ef;--carte:#132a44ee;--carte-bord:#f4c95d55;--rouge:#ff6b6b;--or:#f4c95d;--doux:#b8c7d8;--neige:#ffffff;--ombre:0 10px 30px rgba(0,0,0,.4)}
+:root{--bouton:#d6333c;--bouton-fonce:#8e1f1f;--ciel1:#e4f2ff;--ciel2:#fbf7f2;--texte:#1d2a3a;--verre:rgba(255,255,255,.42);--verre-bord:rgba(255,255,255,.75);--verre-reflet:rgba(255,255,255,.55);--rouge:#c62f2f;--or:#a87a10;--doux:#4f6073;--neige:#a9cdee;--aurore1:rgba(255,120,130,.45);--aurore2:rgba(255,206,110,.45);--aurore3:rgba(120,210,180,.40);--ombre:0 1px 0 rgba(255,255,255,.6) inset,0 20px 50px rgba(20,40,70,.18),0 4px 14px rgba(20,40,70,.08)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ciel1:#071426;--ciel2:#122f4f;--texte:#fdf8ef;--verre:rgba(20,44,72,.42);--verre-bord:rgba(255,255,255,.16);--verre-reflet:rgba(255,255,255,.12);--rouge:#ff7a7a;--or:#f4c95d;--doux:#c3d0de;--neige:#ffffff;--aurore1:rgba(255,80,110,.30);--aurore2:rgba(80,200,160,.32);--aurore3:rgba(110,140,255,.30);--ombre:0 1px 0 rgba(255,255,255,.12) inset,0 24px 60px rgba(0,0,0,.45),0 4px 14px rgba(0,0,0,.25)}}
+:root[data-theme="dark"]{--ciel1:#071426;--ciel2:#122f4f;--texte:#fdf8ef;--verre:rgba(20,44,72,.42);--verre-bord:rgba(255,255,255,.16);--verre-reflet:rgba(255,255,255,.12);--rouge:#ff7a7a;--or:#f4c95d;--doux:#c3d0de;--neige:#ffffff;--aurore1:rgba(255,80,110,.30);--aurore2:rgba(80,200,160,.32);--aurore3:rgba(110,140,255,.30);--ombre:0 1px 0 rgba(255,255,255,.12) inset,0 24px 60px rgba(0,0,0,.45),0 4px 14px rgba(0,0,0,.25)}
 *{box-sizing:border-box}
 html,body{margin:0}
-body{min-height:100vh;background:linear-gradient(180deg,var(--ciel1),var(--ciel2)) fixed;color:var(--texte);font:17px/1.55 'Nunito',system-ui,sans-serif}
+body{min-height:100vh;background:linear-gradient(180deg,var(--ciel1),var(--ciel2)) fixed;color:var(--texte);font:17px/1.55 'Nunito',system-ui,sans-serif;overflow-x:hidden}
+/* Aurore : taches de couleur floues qui dérivent derrière le verre */
+.aurore{position:fixed;inset:-20vmax;pointer-events:none;z-index:0;filter:blur(60px)}
+.aurore i{position:absolute;border-radius:50%;width:55vmax;height:55vmax;animation:derive 22s ease-in-out infinite alternate}
+.aurore i:nth-child(1){background:var(--aurore1);left:5%;top:10%}
+.aurore i:nth-child(2){background:var(--aurore2);right:0;top:30%;animation-duration:28s;animation-delay:-8s}
+.aurore i:nth-child(3){background:var(--aurore3);left:30%;bottom:0;animation-duration:25s;animation-delay:-14s}
+@keyframes derive{0%{transform:translate(0,0) scale(1)}50%{transform:translate(8vmax,-6vmax) scale(1.15)}100%{transform:translate(-6vmax,5vmax) scale(.95)}}
 #neige,#confettis{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+#neige{z-index:1}
 #confettis{z-index:5}
-main{position:relative;z-index:1;min-height:100vh;display:grid;justify-items:center;align-items:start;padding:12vh 16px 24px}
+main{position:relative;z-index:2;min-height:100vh;display:grid;justify-items:center;align-items:start;padding:10vh 16px 24px}
 main > section{width:100%;display:flex;justify-content:center}
 main > section[hidden]{display:none}
-.carte{width:min(520px,100%);background:var(--carte);border:2px solid var(--carte-bord);border-radius:24px;padding:28px 22px;text-align:center;box-shadow:var(--ombre);backdrop-filter:blur(4px)}
+/* Carte en verre givré */
+.carte{position:relative;width:min(520px,100%);padding:30px 22px;text-align:center;border-radius:28px;background:linear-gradient(140deg,var(--verre-reflet),transparent 42%),var(--verre);border:1px solid var(--verre-bord);box-shadow:var(--ombre);backdrop-filter:blur(22px) saturate(170%);-webkit-backdrop-filter:blur(22px) saturate(170%);animation:entree .9s cubic-bezier(.2,.8,.2,1) backwards}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.carte{background:var(--ciel2)}}
+.carte::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at var(--mx,30%) var(--my,0%),rgba(255,255,255,.35),transparent 45%);opacity:var(--reflet,.6);transition:opacity .3s}
+@keyframes entree{from{opacity:0;transform:translateY(24px) scale(.94);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+#ecran-accueil .carte{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out}
+.carte.sortie{animation:sortie .6s ease-in forwards}
+@keyframes sortie{to{opacity:0;transform:translateY(-14px) scale(.96);filter:blur(6px)}}
 h1,h2{font-family:'Mountains of Christmas',cursive;color:var(--rouge);line-height:1.15;margin:.2em 0 .4em}
-h1{font-size:2.1rem}
-h2{font-size:1.8rem}
+h1{font-size:2.2rem}
+h2{font-size:1.9rem}
 .emoji{font-size:4rem;line-height:1}
-.saute{display:inline-block;animation:saute 1.6s ease-in-out infinite}
-@keyframes saute{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-10px) rotate(-6deg)}}
+/* Cadeau 3D */
+.scene{position:relative;width:150px;height:158px;margin:-74px auto 4px}
+.halo{position:absolute;left:50%;top:52%;width:190px;height:190px;margin:-95px 0 0 -95px;border-radius:50%;background:radial-gradient(circle,rgba(255,214,120,.55),transparent 65%);animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(.9);opacity:.7}50%{transform:scale(1.08);opacity:1}}
+.cadeau3d{position:relative;width:100%;height:100%;overflow:visible;animation:flotte 4s ease-in-out infinite}
+@keyframes flotte{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+.cadeau3d .ombre-sol{transform-origin:100px 198px;animation:ombre 4s ease-in-out infinite}
+@keyframes ombre{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.82);opacity:.6}}
+.cadeau3d .couvercle{transform-box:view-box;transform-origin:100px 85px;animation:fretille 3.2s ease-in-out infinite}
+@keyframes fretille{0%,78%,100%{transform:none}84%{transform:translateY(-7px) rotate(-4deg)}90%{transform:translateY(-3px) rotate(3deg)}95%{transform:translateY(-5px) rotate(-1deg)}}
+.cadeau3d.ouvre{animation:none}
+.cadeau3d.ouvre .couvercle{animation:envol .7s cubic-bezier(.3,.1,.3,1) forwards}
+@keyframes envol{to{transform:translate(30px,-120px) rotate(28deg);opacity:0}}
+.cadeau3d.ouvre .lumiere{animation:jaillit .7s ease-out forwards}
+@keyframes jaillit{from{opacity:0;transform:scaleY(.2)}to{opacity:1;transform:scaleY(1)}}
+.cadeau3d .lumiere{opacity:0;transform-box:view-box;transform-origin:100px 92px}
 .sous-titre{font-size:1.15rem}
-.evenement{font-weight:700;color:var(--or)}
-.btn{font:700 1.1rem 'Nunito',sans-serif;border:none;border-radius:999px;padding:14px 28px;background:var(--bouton);color:#fff;cursor:pointer;box-shadow:0 6px 0 #8e1f1f;transition:transform .1s;margin-top:8px}
-.btn:active{transform:translateY(3px);box-shadow:0 3px 0 #8e1f1f}
-.btn.secondaire{background:transparent;color:var(--rouge);box-shadow:none;border:2px solid var(--rouge);font-size:1rem;padding:10px 20px}
+.evenement{display:inline-block;font-weight:800;color:var(--or);letter-spacing:.02em;padding:4px 14px;border-radius:999px;background:rgba(244,201,93,.14);border:1px solid rgba(244,201,93,.45)}
+/* Boutons */
+.btn{position:relative;overflow:hidden;font:800 1.1rem 'Nunito',sans-serif;border:none;border-radius:999px;padding:15px 30px;color:#fff;cursor:pointer;margin-top:14px;background:linear-gradient(180deg,#ff5a5f,var(--bouton) 55%,#b0222b);box-shadow:0 1px 0 rgba(255,255,255,.45) inset,0 6px 0 var(--bouton-fonce),0 12px 26px rgba(214,51,60,.45);transition:transform .12s,box-shadow .12s}
+.btn::before{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:balaye 3.4s ease-in-out infinite}
+@keyframes balaye{0%,60%{left:-60%}100%{left:130%}}
+.btn:hover{transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,.45) inset,0 7px 0 var(--bouton-fonce),0 16px 32px rgba(214,51,60,.55)}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(255,255,255,.45) inset,0 2px 0 var(--bouton-fonce),0 6px 14px rgba(214,51,60,.4)}
+.btn.secondaire{background:rgba(255,255,255,.12);color:var(--rouge);box-shadow:none;border:2px solid var(--rouge);font-size:1rem;padding:10px 20px;backdrop-filter:blur(6px)}
+.btn.secondaire::before{display:none}
 .petit{font-size:.85rem;color:var(--doux);margin-top:18px}
-.ticket{position:relative;margin:16px auto;width:min(360px,100%);height:120px;border-radius:16px;border:3px dashed var(--or);display:grid;place-items:center;overflow:hidden;background:repeating-linear-gradient(45deg,#fff7e6,#fff7e6 12px,#fdeccd 12px,#fdeccd 24px);user-select:none;-webkit-user-select:none}
-.ticket-nom{font-family:'Mountains of Christmas',cursive;font-size:2.4rem;color:#b3261e;padding:0 12px;overflow-wrap:anywhere}
+/* Ticket à gratter : bord doré, encoches, reflet holographique */
+.ticket{position:relative;margin:18px auto;width:min(360px,100%);height:128px;border-radius:18px;border:3px solid transparent;display:grid;place-items:center;overflow:hidden;user-select:none;-webkit-user-select:none;background:repeating-linear-gradient(45deg,#fff8e8,#fff8e8 12px,#fdeccd 12px,#fdeccd 24px) padding-box,linear-gradient(135deg,#8a6208,#ffe08a 30%,#c99a1e 55%,#fff1b8 75%,#a87a10) border-box;box-shadow:0 10px 26px rgba(168,122,16,.28);-webkit-mask:radial-gradient(circle 13px at 0 50%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 13px at 100% 50%,#0000 97%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 13px at 0 50%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 13px at 100% 50%,#0000 97%,#000) right/51% 100% no-repeat}
+.ticket::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.7) 48%,rgba(255,220,255,.35) 52%,transparent 65%);background-size:250% 100%;animation:holo 2.8s ease-in-out infinite;mix-blend-mode:soft-light}
+.ticket.revele::after{animation:none;opacity:0}
+@keyframes holo{0%{background-position:120% 0}100%{background-position:-120% 0}}
+.ticket-nom{font-family:'Mountains of Christmas',cursive;font-size:2.5rem;padding:0 22px;overflow-wrap:anywhere;color:#b3261e;background:linear-gradient(180deg,#e5484d,#9b111e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 rgba(255,255,255,.8))}
 #grattage{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab;transition:opacity .6s}
 .ticket.gagne{animation:gagne .8s ease}
 @keyframes gagne{0%{transform:scale(1)}40%{transform:scale(1.08) rotate(-2deg)}70%{transform:scale(.97) rotate(1deg)}100%{transform:scale(1)}}
@@ -46,11 +84,12 @@ h2{font-size:1.8rem}
 .mission{font-size:1.15rem}
 .mission strong{color:var(--rouge)}
 .delai{font-weight:700}
-blockquote{margin:16px 0;padding:12px 16px;border-left:4px solid var(--or);text-align:left;font-style:italic;background:rgba(127,127,127,.08);border-radius:8px}
-@media (prefers-reduced-motion:reduce){.saute,.ticket.gagne,#apres:not([hidden]){animation:none}#grattage{transition:none}}
+blockquote{margin:16px 0;padding:12px 16px;border-left:4px solid var(--or);text-align:left;font-style:italic;background:rgba(244,201,93,.12);border-radius:10px}
+@media (prefers-reduced-motion:reduce){.aurore i,.halo,.cadeau3d,.cadeau3d .ombre-sol,.cadeau3d .couvercle,.carte,.btn::before,.ticket::after,.ticket.gagne,#apres:not([hidden]){animation:none}#grattage,#ecran-accueil .carte{transition:none}}
 </style>
 </head>
 <body>
+<div class="aurore" aria-hidden="true"><i></i><i></i><i></i></div>
 <canvas id="neige" aria-hidden="true"></canvas>
 <main>
   <section id="ecran-erreur" hidden>
@@ -62,11 +101,47 @@ blockquote{margin:16px 0;padding:12px 16px;border-left:4px solid var(--or);text-
   </section>
   <section id="ecran-accueil" hidden>
     <div class="carte">
-      <div class="emoji"><span class="saute">🎅</span></div>
+      <div class="scene" aria-hidden="true">
+        <div class="halo"></div>
+        <svg class="cadeau3d" id="cadeau" viewBox="0 0 200 210">
+          <defs>
+            <linearGradient id="g-boite" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff6b6b"/><stop offset=".55" stop-color="#d62f3a"/><stop offset="1" stop-color="#8f1420"/></linearGradient>
+            <linearGradient id="g-cote" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".28"/></linearGradient>
+            <linearGradient id="g-couv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8f87"/><stop offset=".6" stop-color="#e03a44"/><stop offset="1" stop-color="#b3222d"/></linearGradient>
+            <linearGradient id="g-ruban" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a87a10"/><stop offset=".45" stop-color="#ffe7a0"/><stop offset=".7" stop-color="#f4c95d"/><stop offset="1" stop-color="#9a6d0a"/></linearGradient>
+            <radialGradient id="g-noeud" cx=".35" cy=".3" r=".85"><stop offset="0" stop-color="#fff6d2"/><stop offset=".45" stop-color="#f4c95d"/><stop offset="1" stop-color="#9a6d0a"/></radialGradient>
+            <radialGradient id="g-sol"><stop offset="0" stop-color="#1d2a3a" stop-opacity=".35"/><stop offset="1" stop-color="#1d2a3a" stop-opacity="0"/></radialGradient>
+            <linearGradient id="g-lumiere" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#fff3c4" stop-opacity=".95"/><stop offset="1" stop-color="#fff3c4" stop-opacity="0"/></linearGradient>
+          </defs>
+          <ellipse class="ombre-sol" cx="100" cy="198" rx="68" ry="9" fill="url(#g-sol)"/>
+          <path class="lumiere" d="M62 92 L20 0 L180 0 L138 92 Z" fill="url(#g-lumiere)"/>
+          <g class="boite">
+            <rect x="38" y="90" width="124" height="102" rx="16" fill="url(#g-boite)"/>
+            <rect x="122" y="90" width="40" height="102" rx="16" fill="url(#g-cote)"/>
+            <rect x="38" y="90" width="124" height="16" fill="#000" opacity=".14"/>
+            <rect x="88" y="90" width="24" height="102" fill="url(#g-ruban)"/>
+            <rect x="47" y="104" width="9" height="74" rx="4.5" fill="#fff" opacity=".28"/>
+            <circle cx="70" cy="150" r="3" fill="#fff" opacity=".5"/>
+            <circle cx="140" cy="128" r="2.4" fill="#fff" opacity=".4"/>
+            <circle cx="132" cy="170" r="2" fill="#fff" opacity=".35"/>
+          </g>
+          <g class="couvercle">
+            <path d="M100 72 C 70 26, 34 44, 56 68 C 68 80, 90 77, 100 72 Z" fill="url(#g-noeud)"/>
+            <path d="M100 72 C 130 26, 166 44, 144 68 C 132 80, 110 77, 100 72 Z" fill="url(#g-noeud)"/>
+            <ellipse cx="66" cy="52" rx="8" ry="4" transform="rotate(-30 66 52)" fill="#fff" opacity=".55"/>
+            <ellipse cx="128" cy="48" rx="6" ry="3" transform="rotate(25 128 48)" fill="#fff" opacity=".45"/>
+            <rect x="28" y="70" width="144" height="32" rx="13" fill="url(#g-couv)"/>
+            <rect x="86" y="70" width="28" height="32" fill="url(#g-ruban)"/>
+            <rect x="38" y="75" width="44" height="6" rx="3" fill="#fff" opacity=".4"/>
+            <circle cx="100" cy="70" r="11" fill="url(#g-noeud)"/>
+            <circle cx="96" cy="66" r="3.5" fill="#fff" opacity=".7"/>
+          </g>
+        </svg>
+      </div>
       <h1 id="accueil-titre"></h1>
       <p class="sous-titre">Une mission top secrète t'attend…</p>
       <p class="evenement" id="accueil-evenement"></p>
-      <button class="btn" id="btn-ouvrir">Ouvrir ma mission 🎁</button>
+      <div><button class="btn" id="btn-ouvrir">Ouvrir ma mission 🎁</button></div>
       <p class="petit" id="accueil-pas-moi"></p>
     </div>
   </section>
@@ -99,6 +174,7 @@ blockquote{margin:16px 0;padding:12px 16px;border-left:4px solid var(--or);text-
   const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let donnees = null;
   let revele = false;
+  let ouverture = false;
 
   function montrer(id) {
     document.querySelectorAll('main > section').forEach(s => { s.hidden = s.id !== id; });
@@ -118,6 +194,7 @@ blockquote{margin:16px 0;padding:12px 16px;border-left:4px solid var(--or);text-
     donnees = { ...res.data, jeton: SantaLien.extraireJeton(location.hash) };
     $('accueil-titre').textContent = SantaTextes.texteAccueil(donnees.d);
     $('accueil-evenement').textContent = cfg.evenement || '';
+    $('accueil-evenement').hidden = !cfg.evenement;
     $('accueil-pas-moi').textContent = SantaTextes.textePasMoi(donnees.d);
     montrer('ecran-accueil');
   }
@@ -146,6 +223,7 @@ blockquote{margin:16px 0;padding:12px 16px;border-left:4px solid var(--or);text-
 
   function preparerGrattage() {
     revele = false;
+    $('ticket').classList.remove('revele');
     $('nom-cible').setAttribute('aria-hidden', 'true');
     const canvas = $('grattage');
     const boite = { width: canvas.clientWidth, height: canvas.clientHeight };
@@ -160,17 +238,27 @@ blockquote{margin:16px 0;padding:12px 16px;border-left:4px solid var(--or);text-
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.globalCompositeOperation = 'source-over';
+    // Couche argentée holographique
     const degrade = ctx.createLinearGradient(0, 0, boite.width, boite.height);
-    degrade.addColorStop(0, '#c3c7cd');
-    degrade.addColorStop(0.5, '#eef0f3');
-    degrade.addColorStop(1, '#a4a9b1');
+    degrade.addColorStop(0, '#b9c0c9');
+    degrade.addColorStop(0.25, '#eef1f5');
+    degrade.addColorStop(0.45, '#d9cdea');
+    degrade.addColorStop(0.6, '#cfe7de');
+    degrade.addColorStop(0.8, '#f4f6f9');
+    degrade.addColorStop(1, '#a3a9b2');
     ctx.fillStyle = degrade;
     ctx.fillRect(0, 0, boite.width, boite.height);
-    ctx.fillStyle = '#6f757e';
-    ctx.font = '700 18px Nunito, sans-serif';
+    for (let i = 0; i < 70; i++) {
+      ctx.fillStyle = 'rgba(255,255,255,' + (0.35 + Math.random() * 0.6) + ')';
+      ctx.beginPath();
+      ctx.arc(Math.random() * boite.width, Math.random() * boite.height, 0.6 + Math.random() * 1.6, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.fillStyle = '#5f6670';
+    ctx.font = '800 18px Nunito, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('🎄 Gratte ici 🎄', boite.width / 2, boite.height / 2);
+    ctx.fillText('✨ Gratte ici ✨', boite.width / 2, boite.height / 2);
     ctx.globalCompositeOperation = 'destination-out';
     ctx.lineWidth = 38;
     ctx.lineCap = 'round';
@@ -227,16 +315,29 @@ blockquote{margin:16px 0;padding:12px 16px;border-left:4px solid var(--or);text-
     $('btn-reveler').hidden = true;
     $('apres').hidden = false;
     $('nom-cible').removeAttribute('aria-hidden');
+    $('ticket').classList.add('revele');
     $('ticket').classList.remove('gagne');
     void $('ticket').offsetWidth;
     $('ticket').classList.add('gagne');
-    confettis();
+    const b = $('ticket').getBoundingClientRect();
+    confettis(b.left + b.width / 2, b.top + b.height / 2, 160);
   }
 
   $('btn-ouvrir').onclick = () => {
-    montrer('ecran-mission');
-    remplirMission();
-    preparerGrattage();
+    if (ouverture) return;
+    ouverture = true;
+    const suite = () => {
+      montrer('ecran-mission');
+      remplirMission();
+      preparerGrattage();
+    };
+    if (reduit) return suite();
+    const cadeau = $('cadeau');
+    cadeau.classList.add('ouvre');
+    const b = cadeau.getBoundingClientRect();
+    setTimeout(() => confettis(b.left + b.width / 2, b.top + b.height * 0.4, 70), 180);
+    setTimeout(() => $('ecran-accueil').querySelector('.carte').classList.add('sortie'), 450);
+    setTimeout(suite, 1000);
   };
   $('btn-reveler').onclick = reveler;
   $('btn-regratter').onclick = () => {
@@ -245,6 +346,26 @@ blockquote{margin:16px 0;padding:12px 16px;border-left:4px solid var(--or);text-
     $('btn-reveler').hidden = false;
     preparerGrattage();
   };
+
+  // Inclinaison 3D de la carte d'accueil et reflet qui suit la souris (souris seulement)
+  const carteAccueil = $('ecran-accueil').querySelector('.carte');
+  if (!reduit && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    addEventListener('pointermove', e => {
+      if ($('ecran-accueil').hidden || ouverture) return;
+      const b = carteAccueil.getBoundingClientRect();
+      const px = Math.max(-0.5, Math.min(0.5, (e.clientX - b.left) / b.width - 0.5));
+      const py = Math.max(-0.5, Math.min(0.5, (e.clientY - b.top) / b.height - 0.5));
+      carteAccueil.style.setProperty('--ry', (px * 12).toFixed(2) + 'deg');
+      carteAccueil.style.setProperty('--rx', (-py * 12).toFixed(2) + 'deg');
+      carteAccueil.style.setProperty('--mx', ((px + 0.5) * 100).toFixed(1) + '%');
+      carteAccueil.style.setProperty('--my', ((py + 0.5) * 100).toFixed(1) + '%');
+      carteAccueil.style.setProperty('--reflet', '1');
+    });
+    document.addEventListener('pointerleave', () => {
+      ['--rx', '--ry'].forEach(v => carteAccueil.style.setProperty(v, '0deg'));
+      carteAccueil.style.setProperty('--reflet', '.6');
+    });
+  }
 
   const neige = $('neige');
   const cn = neige.getContext('2d');
@@ -264,12 +385,13 @@ blockquote{margin:16px 0;padding:12px 16px;border-left:4px solid var(--or);text-
   function dessinerNeige() {
     cn.clearRect(0, 0, innerWidth, innerHeight);
     cn.fillStyle = couleurNeige;
-    cn.globalAlpha = 0.85;
     for (const f of flocons) {
+      cn.globalAlpha = 0.45 + f.r / 7;
       cn.beginPath();
       cn.arc(f.x, f.y, f.r, 0, Math.PI * 2);
       cn.fill();
     }
+    cn.globalAlpha = 1;
   }
   function animerNeige() {
     for (const f of flocons) {
@@ -285,38 +407,56 @@ blockquote{margin:16px 0;padding:12px 16px;border-left:4px solid var(--or);text-
   dimensionner();
   if (reduit) dessinerNeige(); else requestAnimationFrame(animerNeige);
 
-  function confettis() {
+  // Confettis et étoiles dorées : une seule boucle, plusieurs explosions possibles
+  const c = $('confettis');
+  const x = c.getContext('2d');
+  let particules = [];
+  let enCours = false;
+  function confettis(ox, oy, nombre) {
     if (reduit) return;
-    const c = $('confettis');
-    const x = c.getContext('2d');
     const dpr = window.devicePixelRatio || 1;
-    c.width = Math.round(innerWidth * dpr);
-    c.height = Math.round(innerHeight * dpr);
-    x.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const couleurs = ['#d64545', '#f4c95d', '#2e8b57', '#5aa9e6', '#ffffff'];
-    const ps = Array.from({ length: 160 }, () => ({
-      x: innerWidth / 2, y: innerHeight / 3,
-      vx: (Math.random() - 0.5) * 14, vy: -Math.random() * 12 - 4,
-      a: Math.random() * 6, va: (Math.random() - 0.5) * 0.4,
-      t: 6 + Math.random() * 6, c: couleurs[Math.floor(Math.random() * couleurs.length)]
-    }));
+    if (!enCours) {
+      c.width = Math.round(innerWidth * dpr);
+      c.height = Math.round(innerHeight * dpr);
+      x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    const couleurs = ['#d64545', '#f4c95d', '#2e8b57', '#5aa9e6', '#ffffff', '#ffd6e0'];
     const debut = performance.now();
-    (function image(maintenant) {
-      const ecoule = maintenant - debut;
-      x.clearRect(0, 0, innerWidth, innerHeight);
-      for (const p of ps) {
-        p.vy += 0.35; p.vx *= 0.99; p.x += p.vx; p.y += p.vy; p.a += p.va;
-        x.save();
-        x.translate(p.x, p.y);
-        x.rotate(p.a);
-        x.globalAlpha = Math.max(0, 1 - ecoule / 3500);
-        x.fillStyle = p.c;
-        x.fillRect(-p.t / 2, -p.t / 4, p.t, p.t / 2);
-        x.restore();
-      }
-      if (ecoule < 3500) requestAnimationFrame(image);
-      else x.clearRect(0, 0, innerWidth, innerHeight);
-    })(debut);
+    for (let i = 0; i < nombre; i++) {
+      particules.push({
+        x: ox, y: oy, nee: debut, etoile: Math.random() < 0.22,
+        vx: (Math.random() - 0.5) * 14, vy: -Math.random() * 12 - 4,
+        a: Math.random() * 6, va: (Math.random() - 0.5) * 0.4,
+        t: 6 + Math.random() * 6, c: couleurs[Math.floor(Math.random() * couleurs.length)]
+      });
+    }
+    if (!enCours) { enCours = true; requestAnimationFrame(image); }
+  }
+  function etoile(t) {
+    x.beginPath();
+    for (let i = 0; i < 10; i++) {
+      const r = i % 2 ? t * 0.42 : t;
+      const ang = (Math.PI / 5) * i - Math.PI / 2;
+      x.lineTo(Math.cos(ang) * r, Math.sin(ang) * r);
+    }
+    x.closePath();
+    x.fill();
+  }
+  function image(maintenant) {
+    x.clearRect(0, 0, innerWidth, innerHeight);
+    particules = particules.filter(p => maintenant - p.nee < 3500);
+    for (const p of particules) {
+      p.vy += 0.35; p.vx *= 0.99; p.x += p.vx; p.y += p.vy; p.a += p.va;
+      x.save();
+      x.translate(p.x, p.y);
+      x.rotate(p.a);
+      x.globalAlpha = Math.max(0, 1 - (maintenant - p.nee) / 3500);
+      if (p.etoile) { x.fillStyle = '#f4c95d'; etoile(p.t * 0.8); }
+      else { x.fillStyle = p.c; x.fillRect(-p.t / 2, -p.t / 4, p.t, p.t / 2); }
+      x.restore();
+    }
+    if (particules.length) requestAnimationFrame(image);
+    else { enCours = false; x.clearRect(0, 0, innerWidth, innerHeight); }
   }
 
   addEventListener('hashchange', () => location.reload());
