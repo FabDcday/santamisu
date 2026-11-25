@@ -1,0 +1,23 @@
+window.SANTA_CONFIG = {
+  "evenement": "Secret Santa de l'agence",
+  "budget": "environ 10 €",
+  "date": "2026-12-17",
+  "mot": "La recette du Santamisu : une pincée de mystère, une couche de bonne humeur et beaucoup de discrétion. À jeudi 17 décembre au Fair Play ! 🎄",
+  "missions": {
+    "1b6f60b7": "ctsx16mJ22BXBPWO.KbPSJiaJFxXbqXTPT4PQEoXUj8wJ5qSEZBw_9tjDzFWuL7fialidBiWXSWddEra-4FkTkyBfmookNsurgPKmCD63LycT0YgkP6i8HsiT90WCTjFWgDLZttgn66QAGJ91RggD7AYX4o-5oGTXJ_pCCc5Vb6HisLgoTzh9oNYS3AcdRcy70DQqtTisZ0SmEmUt",
+    "1be7682e": "oD_oFmJ4oK-YCFcK.x1rkiWTgOLwA49GW8A5GkaG4S-DrnBrTBfTr-pJ06pf1opykxf6oO08pVNAwKfjyyfDwxc-BGwwfn0Fy96eFO63WTOUj-sMmU2NLlFj3L9X2tjUFNtIguJrOBvcMRgPYddgHdTzRALBlOZNLC2BX_eLmf4R2joPN3wNK-WjRAL3hbhfygAallqcYcrCbELum",
+    "36a0930e": "muSLNPp8Oy3dV9DS.UcC2V8osbz070KLZsCN37iYpEH1Pymj6D-YdUyhjA67kmdyr_KlJv6-PJ_sNBT3yOs06vxdSQdYuvGiQEC1laO3AzXtbtdRMsnqByWvT1zj7K6OYYLcRmlf7xFRhIaQRc4aJYt55EfNrvRa2-vCwu1uw3AaaN4kJCcAD9YUAmGnaSBDbLgeGo74n8i55ZpoM",
+    "3d48bd20": "YYxuPirmJAVmApm6.6qHwdDFtanUkVbvMXaF2pl0CIqCqkvium9aS01m6nhd1FayBxVIYEceY816dpnikf0VS1szp8BvPsxNTfV4E3HeM8uxpjf91YzIZBoJKk6AIXXbv7FtBLbNijZRWnHiWUQu3Gr5R1E6o0IqnPnx338jAn4euXagIO4c5PePk6gukZRlpABwG5tn1rzlqIXpT",
+    "5509f779": "akpCM7aoWNAs-7g-.pQJdSogM0IUzEy2VHCejXXdfBjmrrUnNARSOryM0GnU1xewc36PuzTGd0NGYRSn6D_75ctNgrabNK6N5Wj4V2tOPpmwWnn5K_yh72lAAsu1UYic3dkDYsDXuw1oe5rL8AqZych4nhPHruUpgKSonSqlfMBgRFQthJ89QxEfUS8AT63Gal6mGZrlsE-LnRGbt",
+    "61fea3fa": "9VkU5XunSGglenMJ.ApiH6wuIRHdsEpxJNLJppmt9TvXXRyR0wrO6HSqz3TqhRNsyalNnXpBKTdpA44PZWJQVBi9zkdLoUZ-yFYcbh_ojxWe0Vk2J7vNoeUruFHSPtXT8uJsk1W5Tv7wpwZvJGjRIFROEQ5jaCbVouY_-xjFZvGRrfonx2tl-3iyzGbF_msIHTWtqpW5vVLI36A6g",
+    "85914b50": "aPx15WV_7uWYpMJ4.4QfsE8916fw751zAuJbDxd1qu_p5cLu4ByqW1lxkEIl-H10z5-iQ18FBRuwmLbdnEes-Agr9WqCaaOHFdpuTWB_w88deS5YPIoLZm6CE-TLClJLUFdJzliQ0Oo59YKGdREGM_ZPslZ0sRYHPQAHd80rxGsbWNtmasgpJRIrLbzzFI-yTeFBap2JQgf-gCVPj",
+    "8cbbd8c9": "_OiOKap1Au6bt3H7.NhFEXncm5pqxri05ZBZTck8CZ6Bdn9lRqs2HXXkLEPciDNzaKdjo6qGCfF4yi_0HpbYi6J3CLdRmu3ZEWKP_kY2h1ULkQU4sw8B0E_C4yf14RkH2E1HY1Dezbb98FSRovn0UrC1mkw2297RZbnn8KsYHHWlh6Crj51POEldU6oBV_Tk6Tg-9-8aCy7FWNKPR",
+    "923d3495": "zO6MZn-qflvv81tm.9S5lj2-xnpGfr70T30XQrfVmOBLJc5ABADMHmJDrTVqYyPbzGiDPuDZegkqm6Oi50QSRmBsErM0KVNifxistcQxBZy1Q7vtZ4S51uJK5NSV6Hb-Pu6ALknWRvzSMdJlcoI6uoz0w2yiVLFbrfekqSD5KHOxTDgYgs84upFw1PVDU91EMgiuE8UAf1P4YTMsW",
+    "a049ace0": "uHWKf9wD7Il1CPwG.qJcARz9PJ1jTkx0b21dAfbPmTKU6bAqSx3eHyAjjCiPTymNfPYcp-yvsWdBEYk3IS3jWMImhU9Nu_s1HtHcSZikBB4nJtZsSWYjJYwcKAzRULFgKvrSCZ_jZBsavq125Wc4_zgZjLa_j_w_AmpmnhmK5_QLy1_NmWDiHpW9z6McVVulGU90DKH3alXW57kEx",
+    "a0d5b47b": "YO_Epi4AQ-4r-0-u.cLdSlUgWMBNdHUw0B_AmMOoxClsWak7J1DhAumjwFUstn6zrQLd4RGoVQLG-P804rm6mLzcqJCe9yWJTXcZr1uwg9i-Su-8hh77ncqb2PgfPTj8HZFjt9LjMD2KTcOCrMqv68L72IAIKdPAS_9tY6yDq9Xx-K2l_gz9oP7uejv-fQ6TfoM8zdCZeRzyEAjoT",
+    "a6d40bcb": "9un5-n79AT6qf0Fm.333jm9JybxdqANJXx5ErmMYCe-5Wn-2GpMNEqWn2caJLEofP89ga4R8HrnEXCPtYe0kahPhYxjjIcw5LgFyOyitVbDiivIO5u0FrQK0v-2QnrgEIS3Xi-eIxH7kAb1yPldfYFbwXlUVLsjfueEevhnGaocSitfHsEEt5p3QZKt3NLTZLNzmc5vtR8mdfm2hz",
+    "ab224ebf": "sa-bs1n1BBmWj8fA.KuxCZ6PjtpvvtMZYh3y_b4X-XUjGBS1LN-JfE7ZAK0n8PYEEXN3rbEnWnK0vqYIOqx8n-vgoB0M_odJBOr_duvTjce7rWKzJdj3-TGh-q--vGtOe3o-P2hjr2GNDqmHhpUSDlf6wgE7SJnO8jtELz6pjAi_DJeqfKtjdYQ4-1JQSNRsQvCbB1njrUpGtuPIS",
+    "e1dfd00e": "Tbps3Nwj6VPsUW-Q.Mj4H2XKiWDdiZPzpKC_JLJDuUsW1VFOyYgPQjdknRCR2zdVQ12rB5kq5Fd7ULDxVB2i7XrtLC3zY4cNLH5dELTfMXBmL4L7J9I2_W7wiCV-VXsHxRLnN7OoaJsBhVJPSbXNlifxOW48nQx9O-Q133pwmal9UfgDTYQ5IFwC5TaEe4AqiQm_oL1tiPnz6U6Li",
+    "feab365e": "PkKwkWVnNVIuvMV5.ACKEPRncrrF-CjuWu_uSB2mht6YA_imA8XJjerkpjaXQPMkCNEwYluUoyGxuKpUfe1r4_iuPjrKfGH6uR0fNAJxZTzMxs7qB8jfjuYAmQSCPjPZKQRyOSm9rs3reAWvddgbQ5NKq1JIJPLUYhaKh4yrA-d1YRtwMYbMU-Dlujjp0XhatSY7OGNiDQ3iT2FD0"
+  }
+};
